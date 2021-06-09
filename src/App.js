@@ -66,7 +66,11 @@ const App = () => {
         Teacher:Mike Scott
     </Figure.Caption>
   </Figure>
+  <div style={{flex:1}}>
+  <h5>Course Progress</h5>
   <ProgressBar now={progress} label={progressLabel} style={{flex:1,marginLeft:10}}/>
+  </div>
+  
 
   <Card style={{flex:1,marginLeft:10,height:100}}>
     <Card.Body>
