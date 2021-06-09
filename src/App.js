@@ -15,67 +15,105 @@ import { CountdownCircleTimer } from 'react-countdown-circle-timer'
 import FigureImage from 'react-bootstrap/FigureImage'
 import Figure from 'react-bootstrap/Figure';
 import { useSpeechSynthesis } from 'react-speech-kit';
+import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
+import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
+import 'bootstrap/dist/css/bootstrap.min.css'
 
-
+let readQuestion=true;
+let spokenText=''
 const App = () => {
   const progress=60
   const progressLabel ='60%'
-  const question='welcome to react native'
-  let readQuestion=true;
-  const { speak } = useSpeechSynthesis();
+  const question='Welcome to React Native'
+  let spoken =false
+  const { speak,speaking} = useSpeechSynthesis();
   
+  
+  const stopListen=()=>{
+  console.log('stopping to listen')
+  SpeechRecognition.stopListening();
+
+  }
+
+
+  const SpeakListen=()=>{
+  if (readQuestion)
+  {
+  speak({text:question})
+  while (spoken==false){
+    console.log("still speaking")
+  }
+  readQuestion=false
+  }
+  SpeechRecognition.startListening();
+  setTimeout(function(){console.log('Listening ...');},3000);
+  const {transcript} =useSpeechRecognition();
+  console.log(transcript)
+  }
+
   return (
     <div className='parent'>
-    {/* `<Header title='Speed Learn'/> */}
     <CustomNavbar />
-    <div style={{ display: 'block', padding: 10}}>
-    <h4>Assignement Progress</h4>
-    <ProgressBar now={progress} label={progressLabel}/>
-    </div>
-    <div className='container2'>
-    {/* <img src={require('./assets/teacher.png').default } width={180} height={180}/> */}
-    <Figure>
-  <Figure.Image
-    width={150}
-    height={150}
-    alt="171x180"
-    src={require('./assets/teacher.png').default }
-  />
-  <Figure.Caption>
-    Mike Scott
-  </Figure.Caption>
-</Figure>
-    
-    <Card bg={'primary'} text={'white'}>
-       <Card.Body >
-         <h1>Question 6</h1>
-       </Card.Body>
+  <div className='container2'>
+  <Figure  style={{flex:1,marginLeft:10,height:100,width:150}}>
+   <Figure.Image
+      width={100}
+      height={100}
+      src={require('./assets/teacher.png').default }
+    />
+    <Figure.Caption>
+        Teacher:Mike Scott
+    </Figure.Caption>
+  </Figure>
+  <ProgressBar now={progress} label={progressLabel} style={{flex:1,marginLeft:10}}/>
+
+  <Card style={{flex:1,marginLeft:10,height:100}}>
+    <Card.Body>
+    <h4>ABC School XII Class</h4>
+    </Card.Body>
     </Card>
-    <Card bg={'primary'} text={'white'}>
-      <Card.Title>Assignment</Card.Title>
+
+   <Card style={{flex:1,marginLeft:10,height:100}} >
        <Card.Body >
-         <h1>Biology-Cell Structure</h1>
+        <h4>Question 6</h4> 
        </Card.Body>
-    </Card>
-    <CountdownCircleTimer
-    isPlaying
-    duration={60}
-    colors={[
+   </Card>
+   
+   <Card style={{flex:1,marginLeft:10,height:100,marginRight:10}}>
+       <Card.Body >
+         <h4>Biology-Cell Structure</h4>
+       </Card.Body>
+   </Card>
+   <CountdownCircleTimer
+      isPlaying
+      duration={60}
+      size={100}
+      colors={[
       ['#004777', 0.33],
       ['#F7B801', 0.33],
       ['#A30000', 0.33],
     ]}
-    ariaLabel={'Time Remaining'}
-  >
-    {({ remainingTime }) => remainingTime}
-  </CountdownCircleTimer>
+    label={'Time Remaining'}
+    onComplete={stopListen}
+    style={{flex:1,marginLeft:10}}
+    >
+      {({ remainingTime }) => remainingTime}
+    </CountdownCircleTimer>
     </div>
     <div className='container1'>
-    {<QImage />} 
+    <QImage />
     <Concept />
     </div>
+    
+    {/* {SpeakListen()} */}
+    <div className='container2'>  
+    <Button onClick={()=>speak({text:question})} size="lg"  >Repeat the question(audio)</Button>
+    <Button size="lg">submit</Button>
+    <Button size="lg">skip</Button >
     </div>
+    </div>
+
   )
 }
 
