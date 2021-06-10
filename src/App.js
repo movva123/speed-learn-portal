@@ -89,10 +89,12 @@ const App = () => {
          <h4>Biology-Cell Structure</h4>
        </Card.Body>
    </Card>
+   <div>
+   <h5>Time Remaining</h5>
    <CountdownCircleTimer
       isPlaying
       duration={60}
-      size={100}
+      size={80}
       colors={[
       ['#004777', 0.33],
       ['#F7B801', 0.33],
@@ -104,10 +106,13 @@ const App = () => {
     >
       {({ remainingTime }) => remainingTime}
     </CountdownCircleTimer>
+
+   </div>
+   
     </div>
     <div className='container1'>
     <QImage />
-    <Concept />
+    <Concept transcript="placeholder for what you said"/>
     </div>
     
     {/* {SpeakListen()} */}

@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Concept = () => {
+const Concept = (props) => {
     return (
             <div className='concept'>
               <div className='question'> 
@@ -14,6 +14,11 @@ const Concept = () => {
                   needed to power the cell's biochemical reactions. 
                   Chemical energy produced by the mitochondria is stored in a small molecule called adenosine triphosphate (ATP).</h3>     
               </div>
+              <div className='additional'>
+                <h3>taking notes ....</h3>
+                {props.transcript}
+              </div>
+              
             </div>          
     )
 }
