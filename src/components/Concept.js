@@ -1,23 +1,37 @@
 import React from 'react'
+import { Card } from 'react-bootstrap'
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Concept = (props) => {
     return (
             <div className='concept'>
-              <div className='question'> 
-              <h1>Concept/Question</h1>
-              <h2>In what part of mitochondria does the electron transport chain take place?</h2>   
-              </div>
 
-              <div className='additional'>
-              <h2>Additional information </h2>
-              <h3>Mitochondria are membrane-bound cell organelles (mitochondrion, singular) that generate most of the chemical energy 
-                  needed to power the cell's biochemical reactions. 
-                  Chemical energy produced by the mitochondria is stored in a small molecule called adenosine triphosphate (ATP).</h3>     
-              </div>
-              <div className='additional'>
-                <h3>taking notes ....</h3>
+              <Card style={{flex:1,marginLeft:10,marginTop:10,marginRight:10}}>
+              <Card.Title>
+              Concept/Question
+              </Card.Title>
+              <Card.Body>
+              {props.question}
+              </Card.Body>
+              </Card>
+
+              <Card style={{flex:1,marginLeft:10,marginTop:10,marginRight:10}}>
+              <Card.Title>
+              Additional information
+              </Card.Title>
+              <Card.Body>
+                {props.additional}
+              </Card.Body>
+              </Card>
+
+              <Card style={{flex:1,marginLeft:10,marginTop:10,marginRight:10}}>
+              <Card.Title>
+                taking notes ....
+              </Card.Title>
+              <Card.Body>
                 {props.transcript}
-              </div>
+              </Card.Body>
+              </Card>
               
             </div>          
     )

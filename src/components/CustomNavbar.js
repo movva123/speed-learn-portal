@@ -3,8 +3,8 @@ import Navbar from 'react-bootstrap/Navbar'
 const CustomNavbar = () => {
     return (
         
-        <Navbar bg={"primary"} text={"white"}>
-        <Navbar.Brand href="#home">Speed Learn</Navbar.Brand>
+        <Navbar bg={"primary"}>
+        <Navbar.Brand href="#home">Nuggets</Navbar.Brand>
         <Navbar.Toggle />
         <Navbar.Collapse className="justify-content-end">
         <Navbar.Text>
